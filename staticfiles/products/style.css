@@ -1,0 +1,106 @@
+
+body {
+    
+     background: #eef2f7;
+    
+}
+.hero {
+    background: #ffffff;
+    padding: 80px 20px;
+    text-align: center;
+    
+    border-radius: 15px;
+    margin-top: 30px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+.hero .btn {
+    padding: 12px 30px;
+    font-size: 18px;
+    border-radius: 8px;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.product-card {
+    width: 220px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    background: white;
+}
+
+.search-grid {
+    grid-template-columns: repeat(auto-fill, 220px);
+}
+
+.product-grid.search-grid {
+    justify-content: center;
+}
+
+.product-grid.search-grid .product-card {
+    text-align: center;
+}
+
+.product-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover !important;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    gap:10px;
+
+
+}
+
+
+.product-card button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.quantity-control {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.quantity-control form {
+    display: inline-flex !important;
+    flex-direction: row !important;
+    margin: 0 !important;
+}
+.quantity-control span {
+    display: inline-block;
+    min-width: 25px;
+    text-align: center;
+}
+
+.quantity-control button {
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    margin: 0;
+}

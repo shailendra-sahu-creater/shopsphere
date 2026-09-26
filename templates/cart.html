@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<h1>Your Cart 🛒</h1>
+
+{% if cart_products %}
+
+    {% for item in cart_products %}
+
+        <div class="product-card cart-item">
+
+            <h2>{{ item.product.name }}</h2>
+
+            <p>Price: ₹{{ item.product.price }}</p>
+
+            <div class="quantity-control">
+
+                <form action="{% url 'cart' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="product_id" value="{{ item.product.id }}">
+                    <input type="hidden" name="action" value="decrease">
+                    <button type="submit">−</button>
+                 </form>
+
+                 <span>{{ item.quantity }}</span>
+
+                 <form action="{% url 'cart' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="product_id" value="{{ item.product.id }}">
+                    <input type="hidden" name="action" value="increase">
+                    <button type="submit">+</button>
+                </form>
+            </div>
+
+            <h3>Item Total: ₹{{ item.total }}</h3>
+
+            <form action="{% url 'cart' %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="product_id" value="{{ item.product.id }}">
+                <input type="hidden" name="action" value="remove">
+
+                <button type="submit">Remove 🗑️</button>
+            </form>
+
+        </div>
+
+        
+
+    {% endfor %}
+
+    <h2>Grand Total: ₹{{ grand_total }}</h2>
+    
+    <a href="{% url 'checkout' %}">
+        <button>Proceed to Checkout</button>
+    </a>
+{% else %}
+
+    <p>Your cart is currently empty.</p>
+
+{% endif %}
+
+{% endblock %}

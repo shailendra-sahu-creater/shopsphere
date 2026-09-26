@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form method="GET" class="mb-4 text-center">
+    <input
+        type="text"
+        name="search"
+        placeholder="Search products..."
+        value="{{ request.GET.search }}"
+    >
+    <button type="submit" class="btn btn-primary">
+        Search 🔎
+    </button>
+</form>
+
+<div class="text-center mb-4">
+    <a href="{% url 'products' %}" class="btn btn-secondary">
+        All
+    </a>
+
+    <a href="?category=Electronics" class="btn btn-primary">
+        Electronics
+    </a>
+
+    <a href="?category=Clothing" class="btn btn-primary">
+        Clothing
+    </a>
+
+    <a href="?category=Footwear" class="btn btn-primary">
+        Footwear
+    </a>
+
+    <a href="?category=Accessories" class="btn btn-primary">
+        Accessories
+    </a>
+
+    <a href="?category=Home%20%26%20Kitchen" class="btn btn-primary">
+        Home & Kitchen
+    </a>
+
+    <a href="?category=Stationery" class="btn btn-primary">
+        Stationery
+    </a>
+
+    <a href="?category=Books" class="btn btn-primary">
+        Books
+    </a>
+</div>
+
+<h1>Our Products 🛍️</h1>
+
+<div class="product-grid search-gridss">
+
+    {% for product in products %}
+
+        <div class="product-card">
+
+            {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            {% endif %}
+
+            <h2>
+                 <a href="{% url 'product_detail' product.id %}">
+                     {{ product.name }}
+                 </a>
+            </h2>
+
+            <p>{{ product.description }}</p>
+
+            <h3>₹{{ product.price }}</h3>
+
+            <p>Stock: {{ product.stock }}</p>
+
+            <form action="{% url 'cart' %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="product_id" value="{{ product.id }}">
+                <input type="hidden" name="action" value="add">
+
+                <button type="submit">Add to Cart 🛒</button>
+            </form>
+
+        </div>
+
+    {% empty %}
+
+        <p>No products available.</p>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

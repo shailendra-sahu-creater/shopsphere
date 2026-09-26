@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>My Orders 📦</h1>
+
+{% if orders %}
+<div class="product-grid">
+
+    {% for order in orders %}
+
+        <div class="product-card">
+
+            <h2>
+                <h2>
+                    <a href="{% url 'order_detail' order.id %}">
+                        Order #{{ order.id }}
+                    </a>
+                </h2>
+            </h2>
+
+            <p>Name: {{ order.name }}</p>
+
+            <p>Phone: {{ order.phone }}</p>
+
+            <p>Total: ₹{{ order.total }}</p>
+
+            <p>Status: <strong>{{ order.status }}</strong></p>
+
+            <p>Order Date: {{ order.created_at }}</p>
+
+            <h3>Products:</h3>
+
+            {% for item in order.orderitem_set.all %}
+         <p>
+            {{ item.product.name }}
+             ×{{ item.quantity }}
+         </p>
+            {% endfor %}
+         <hr>
+        </div>
+    {% endfor %}
+</div>
+{% else %}
+
+    <p>No orders found.</p>
+
+{% endif %}
+
+{% endblock %}

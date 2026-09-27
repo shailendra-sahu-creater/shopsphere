@@ -108,12 +108,12 @@ def checkout(request):
         for product_id, quantity in cart.items():
             product = Product.objects.get(id=product_id)
 
-        if quantity > product.stock:
-            messages.error(
-                request,
-                f"Only {product.stock} items of {product.name} are available."
+            if quantity > product.stock:
+                messages.error(
+                    request,
+                    f"Only {product.stock} items of {product.name} are available."
         )
-        return redirect("cart")
+                return redirect("cart")
         # Order create
         order = Order.objects.create(
             user=request.user,

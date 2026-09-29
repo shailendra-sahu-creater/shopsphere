@@ -50,8 +50,12 @@ def cart(request):
                     messages.error(request, "Product is out of stock.")
             
             elif action == "increase":
+                product = Product.objects.get(id=product_id)
+
                 if cart.get(product_id, 0) < product.stock:
                     cart[product_id] = cart.get(product_id, 0) + 1
+                else:
+                    messages.error(request, "Product is out of stock.")
                 
             elif action == "decrease":
                 if product_id in cart:
